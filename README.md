@@ -80,3 +80,61 @@ termux-desktop-pack/
 - Os ícones são distribuídos separadamente como zip na aba Releases para manter o repositório leve
 - O compositor gráfico é desativado por padrão para melhor desempenho em hardware mobile
 - O áudio é configurado via PulseAudio na porta 4713
+
+## Android 12 e superior - Phantom Process
+
+A partir do Android 12, o sistema mata processos filhos do Termux automaticamente (phantom process killer). Isso derruba o servidor X11, o XFCE4 e o PulseAudio pouco depois de iniciar.
+
+### Opções do desenvolvedor (sem root, sem ADB)
+
+Ative o modo desenvolvedor em Configuracoes > Sobre o telefone > toque 7x em "Numero da versao", depois vá em Configuracoes > Sistema > Opcoes do desenvolvedor e ative:
+
+- **Desativar limite de processos em segundo plano** — coloque em "Sem limite"
+- **Nao manter atividades** — deixe desativado
+- **Limite de processos em segundo plano** — coloque em "4 processos" ou mais
+
+Essas opcoes reduzem mas nao eliminam completamente o problema.
+
+### Solucao definitiva via ADB (recomendado)
+
+Conecte o dispositivo ao PC com ADB habilitado, ou use ADB wireless, e rode:
+
+```bash
+# Desabilitar o phantom process killer completamente
+adb shell "/system/bin/device_config set_sync_disabled_for_tests persistent"
+adb shell "/system/bin/device_config put activity_manager max_phantom_processes 2147483647"
+```
+
+Para verificar se aplicou:
+
+```bash
+adb shell "/system/bin/device_config get activity_manager max_phantom_processes"
+# Deve retornar: 2147483647
+```
+
+Para reverter:
+
+```bash
+adb shell "/system/bin/device_config set_sync_disabled_for_tests none"
+adb shell "/system/bin/device_config delete activity_manager max_phantom_processes"
+```
+
+### ADB wireless (sem cabo)
+
+No Android 11+, ative em Opcoes do desenvolvedor > Depuracao sem fio, depois:
+
+```bash
+adb pair <ip>:<porta>   # use o IP e porta mostrados na tela
+adb connect <ip>:5555
+adb shell "..."
+```
+
+### Sem PC - via Termux com root
+
+Se o dispositivo tiver root:
+
+```bash
+su -c "device_config put activity_manager max_phantom_processes 2147483647"
+```
+
+Ou instale o app **Shizuku** para executar comandos privilegiados sem root completo.
