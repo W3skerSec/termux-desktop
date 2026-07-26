@@ -1,0 +1,94 @@
+/* ═══════════════════════════════════════════════════
+   REDMOON GTK3 CSS OVERRIDES — v3.0
+   Aplica refinamentos visuais sobre o tema Nightfox-Dark
+   ═══════════════════════════════════════════════════ */
+
+/* ── Whisker Menu ── */
+#whiskermenu-window {
+    background-color: rgba(7, 6, 12, 0.94);
+    border: 1px solid rgba(255, 23, 68, 0.18);
+    border-radius: 12px;
+}
+
+#whiskermenu-window button,
+#whiskermenu-window treeview {
+    background-color: transparent;
+    color: #ede8f5;
+    border-radius: 7px;
+    transition: background-color 180ms ease;
+}
+
+#whiskermenu-window button:hover {
+    background-color: rgba(255, 23, 68, 0.14);
+    color: #ff6b80;
+    border-radius: 7px;
+}
+
+#whiskermenu-window treeview:hover {
+    background-color: rgba(255, 23, 68, 0.12);
+}
+
+#whiskermenu-window entry {
+    background-color: rgba(14, 12, 22, 0.85);
+    border: 1px solid rgba(255, 23, 68, 0.25);
+    border-radius: 8px;
+    color: #ede8f5;
+    caret-color: #ff1744;
+}
+
+#whiskermenu-window entry:focus {
+    border-color: rgba(255, 61, 90, 0.55);
+    box-shadow: 0 0 0 2px rgba(255, 23, 68, 0.12);
+}
+
+/* ── Scrollbars finas no GTK ── */
+scrollbar {
+    min-width: 5px;
+    min-height: 5px;
+}
+
+scrollbar slider {
+    background-color: rgba(255, 23, 68, 0.28);
+    border-radius: 99px;
+    min-width: 5px;
+    min-height: 32px;
+}
+
+scrollbar slider:hover {
+    background-color: rgba(255, 61, 90, 0.55);
+}
+
+/* ── Tooltips ── */
+tooltip {
+    background-color: rgba(10, 8, 16, 0.95);
+    border: 1px solid rgba(255, 23, 68, 0.25);
+    border-radius: 7px;
+    color: #ede8f5;
+    padding: 4px 8px;
+}
+
+/* ── Menus dropdown ── */
+menu {
+    background-color: rgba(10, 8, 16, 0.96);
+    border: 1px solid rgba(255, 23, 68, 0.18);
+    border-radius: 10px;
+    color: #d6d0e8;
+}
+
+menuitem:hover {
+    background-color: rgba(255, 23, 68, 0.14);
+    border-radius: 6px;
+    color: #ff6b80;
+}
+
+/* ── Seleção de texto ── */
+selection {
+    background-color: rgba(255, 23, 68, 0.28);
+    color: #ffffff;
+}
+
+/* ── Barra de título de janelas GTK ── */
+headerbar {
+    background-color: rgba(12, 10, 19, 0.95);
+    border-bottom: 1px solid rgba(255, 23, 68, 0.12);
+}

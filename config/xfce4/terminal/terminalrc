@@ -1,0 +1,22 @@
+[Configuration]
+FontName=Monospace 11
+ColorBackground=#0d0d11
+ColorForeground=#e1e1e6
+ColorCursor=#9933ff
+ColorPalette=#121214;#ff5555;#50fa7b;#f1fa8c;#bd93f9;#ff79c6;#8be9fd;#bfbfbf;#504c67;#ff6e6e;#69ff94;#ffffa5;#d6acff;#ff92d0;#a4ffff;#e6e6e6
+BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
+BackgroundDarkness=0.80
+TabActivityColor=#9933ff
+MiscAlwaysShowTabs=FALSE
+MiscBell=FALSE
+MiscBordersDefault=FALSE
+MiscCursorBlinks=TRUE
+MiscCursorShape=TERMINAL_CURSOR_BLOCK
+MiscDefaultGeometry=100x28
+MiscInheritGeometry=FALSE
+MiscMenubarDefault=FALSE
+MiscMouseAutohide=FALSE
+MiscMouseWheelZoom=TRUE
+MiscToolbarDefault=FALSE
+MiscScrollbarStyle=TERMINAL_SCROLLBAR_NONE
+MiscHighlightUrls=TRUE

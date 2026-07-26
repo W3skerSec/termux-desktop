@@ -1,0 +1,26 @@
+# Dados sensíveis
+*.key
+*.pem
+*.p12
+*.pfx
+*.token
+*secret*
+*password*
+*passwd*
+*.env
+.env*
+Info.txt
+key.txt
+
+# Arquivos temporários
+*.log
+*.tmp
+*.bak
+*.bak-*
+__pycache__/
+.DS_Store
+
+# Configs com IPs locais
+*recon*
+*scan*
+icons/

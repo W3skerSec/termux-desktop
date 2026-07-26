@@ -1,0 +1,43 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<channel name="qterminal" version="1.0">
+  <!-- ─── REDMOON CORE — QTerminal Theme v3.0 ─── -->
+
+  <!-- Cores base -->
+  <property name="color-foreground"          type="string" value="#EDE8F5"/>
+  <property name="color-background"          type="string" value="#07060C"/>
+  <property name="color-cursor"              type="string" value="#FF3D5A"/>
+  <property name="color-selection"           type="string" value="#2D1A28"/>
+  <property name="color-selection-use-default" type="bool" value="false"/>
+  <property name="color-bold"                type="string" value="#F0ECF8"/>
+  <property name="color-bold-use-default"    type="bool"   value="false"/>
+
+  <!-- Paleta 16 cores Redmoon -->
+  <!-- 0:void 1:crimson 2:verde 3:ouro 4:azul 5:violeta 6:cyan 7:cinza -->
+  <!-- 8:superfície 9:crimson-bright 10:verde-bright 11:ouro-bright 12:azul-bright 13:violeta-bright 14:cyan-bright 15:branco -->
+  <property name="color-palette" type="string"
+    value="#0E0C16;#FF1744;#4ADE80;#F5B700;#7AA2F7;#9D4EDD;#06F7D4;#D6D0E8;#2A2438;#FF3D5A;#6EEA9E;#FFD54F;#A4C0FF;#C084FC;#67FAE6;#F0ECF8"/>
+
+  <!-- Tipografia -->
+  <property name="font-name"         type="string" value="JetBrains Mono Bold 10"/>
+
+  <!-- Comportamento -->
+  <property name="scrolling-lines"   type="uint"   value="10000"/>
+  <property name="scrolling-unlimited" type="bool" value="true"/>
+  <property name="title-mode"        type="string" value="TERMINAL_TITLE_REPLACE"/>
+
+  <!-- Fundo sólido Redmoon (sem imagem) -->
+  <property name="background-mode"   type="string" value="TERMINAL_BACKGROUND_SOLID"/>
+  <property name="background-darkness" type="double" value="1"/>
+
+  <!-- Cursor em sublinhado (estilo shell moderno) -->
+  <property name="misc-cursor-shape" type="string" value="TERMINAL_CURSOR_SHAPE_UNDERLINE"/>
+
+  <!-- Espaçamento de células levemente maior = mais arejado -->
+  <property name="cell-width-scale"  type="double" value="1.0"/>
+  <property name="cell-height-scale" type="double" value="1.15"/>
+
+  <!-- QoL -->
+  <property name="misc-show-unsafe-paste-dialog" type="bool" value="false"/>
+  <property name="misc-confirm-close"            type="bool" value="false"/>
+</channel>

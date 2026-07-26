@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Terminal
+Comment=VTE Terminal com fundo translucente
+Exec=/data/data/com.termux/files/home/.local/bin/launch-terminal
+Icon=utilities-terminal
+Terminal=false
+StartupNotify=false

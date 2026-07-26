@@ -1,0 +1,19 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# ╔══════════════════════════════════════════════════════════╗
+# ║  launch-terminal — lxterminal (VTE) wrapper              ║
+# ║  lxterminal: VTE-based, estável no XFCE4/Termux-X11     ║
+# ╚══════════════════════════════════════════════════════════╝
+
+export DISPLAY=:0
+export LANG=en_US.UTF-8
+export XDG_RUNTIME_DIR=${TMPDIR:-/data/data/com.termux/files/usr/tmp}
+unset SESSION_MANAGER
+
+# Pega DBUS direto do ambiente do xfce4-session (mais confiável)
+XFCE_PID=$(pgrep -x xfce4-session | head -1)
+if [ -n "$XFCE_PID" ]; then
+  DBUS_ADDR=$(cat /proc/$XFCE_PID/environ 2>/dev/null | tr '\0' '\n' | grep "^DBUS_SESSION_BUS_ADDRESS=" | head -1 | cut -d= -f2-)
+  [ -n "$DBUS_ADDR" ] && export DBUS_SESSION_BUS_ADDRESS="$DBUS_ADDR"
+fi
+
+exec /data/data/com.termux/files/usr/bin/lxterminal "$@"
