@@ -46,7 +46,7 @@ bash install.sh
 Abra o app Termux-X11, depois rode no Termux:
 
 ```bash
-bash ~/iniciar_athena.sh
+bash ~/iniciar.sh
 ```
 
 ## Requisitos
@@ -69,7 +69,7 @@ bash ~/iniciar_athena.sh
 ```
 termux-desktop-pack/
   install.sh          # instalador automático
-  iniciar_athena.sh   # script de inicialização do desktop
+  iniciar.sh   # script de inicialização do desktop
   config/             # dotfiles (XFCE4, GTK, LXTerminal, Plank)
   bin/                # scripts auxiliares
   icons/              # tema de ícones (baixado separadamente via Releases)

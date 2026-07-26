@@ -47,8 +47,8 @@ cp -rf "$SCRIPT_DIR/config/lxterminal" ~/.config/
 cp -f "$SCRIPT_DIR/bin/launch-terminal" ~/.local/bin/
 chmod +x ~/.local/bin/launch-terminal
 
-cp -f "$SCRIPT_DIR/iniciar_athena.sh" ~/iniciar_athena.sh
-chmod +x ~/iniciar_athena.sh
+cp -f "$SCRIPT_DIR/iniciar.sh" ~/iniciar.sh
+chmod +x ~/iniciar.sh
 
 # Baixar e instalar icones se nao existirem localmente
 if [ -d "$SCRIPT_DIR/icons" ] && [ "$(ls -A "$SCRIPT_DIR/icons" 2>/dev/null)" ]; then
@@ -66,5 +66,5 @@ echo ""
 echo "Para iniciar o desktop:"
 echo "  1. Abra o app Termux-X11"
 echo "  2. No Termux, rode:"
-echo "     bash ~/iniciar_athena.sh"
+echo "     bash ~/iniciar.sh"
 echo ""
