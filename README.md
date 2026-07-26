@@ -7,7 +7,7 @@ Configuração completa de ambiente gráfico XFCE4 para Termux no Android, otimi
 Cole no Termux e aguarde:
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/W3skerSec/termux-desktop-pack/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/W3skerSec/termux-desktop/main/install.sh)
 ```
 
 ## Instalação manual (passo a passo)
@@ -22,7 +22,7 @@ pkg update -y && pkg upgrade -y
 
 ```bash
 pkg install git -y
-git clone https://github.com/W3skerSec/termux-desktop-pack.git
+git clone https://github.com/W3skerSec/termux-desktop.git
 cd termux-desktop-pack
 ```
 
@@ -30,7 +30,7 @@ cd termux-desktop-pack
 
 ```bash
 mkdir -p icons
-wget -O icons.zip https://github.com/W3skerSec/termux-desktop-pack/releases/latest/download/icons.zip
+wget -O icons.zip https://github.com/W3skerSec/termux-desktop/releases/latest/download/icons.zip
 unzip icons.zip -d icons/
 rm icons.zip
 ```

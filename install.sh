@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 set -e
 
-REPO="https://github.com/W3skerSec/termux-desktop-pack"
+REPO="https://github.com/W3skerSec/termux-desktop"
 ICONS_URL="$REPO/releases/latest/download/icons.zip"
 INSTALL_DIR="$HOME/termux-desktop-pack"
 
