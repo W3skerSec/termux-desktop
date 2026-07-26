@@ -1,21 +1,24 @@
 # Termux Desktop Pack
 
-XFCE4 desktop environment configuration for Termux on Android, optimized for mobile screens with audio support, icon theme, and lightweight panel setup.
+Configuração completa de ambiente gráfico XFCE4 para Termux no Android, otimizada para telas mobile com suporte a áudio, tema de ícones e painel leve.
 
-## Requirements
+## Instalação em um comando
 
-- Android device with Termux installed
-- [Termux-X11](https://github.com/termux/termux-x11) app installed
+Cole no Termux e aguarde:
 
-## Fresh Install (from zero)
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/W3skerSec/termux-desktop-pack/main/install.sh)
+```
 
-### 1. Install Termux and update packages
+## Instalação manual (passo a passo)
+
+### 1. Atualizar o Termux
 
 ```bash
 pkg update -y && pkg upgrade -y
 ```
 
-### 2. Clone this repository
+### 2. Clonar o repositório
 
 ```bash
 pkg install git -y
@@ -23,9 +26,7 @@ git clone https://github.com/W3skerSec/termux-desktop-pack.git
 cd termux-desktop-pack
 ```
 
-### 3. Download and extract icon theme
-
-Download the icon pack from the [latest release](https://github.com/W3skerSec/termux-desktop-pack/releases/latest) and place it inside the `icons/` folder:
+### 3. Baixar o pacote de ícones
 
 ```bash
 mkdir -p icons
@@ -34,43 +35,48 @@ unzip icons.zip -d icons/
 rm icons.zip
 ```
 
-### 4. Run the installer
+### 4. Executar o instalador
 
 ```bash
 bash install.sh
 ```
 
-### 5. Start the desktop
+### 5. Iniciar o desktop
 
-Open the Termux-X11 app, then run:
+Abra o app Termux-X11, depois rode no Termux:
 
 ```bash
 bash ~/iniciar_athena.sh
 ```
 
-## What gets installed
+## Requisitos
 
-- XFCE4 desktop environment
-- LXTerminal with dark theme and transparency
-- XFCE4 panel with shortcuts for Terminal, Files, Browser and Editor
-- PulseAudio with Android audio backend (AAudio/OpenSL ES)
-- Material Black Cherry Suru icon theme
-- GTK2/GTK3 dark theme configuration
-- Plank dock launcher
+- Android com Termux instalado
+- App [Termux-X11](https://github.com/termux/termux-x11) instalado
 
-## Structure
+## O que é instalado
+
+- Ambiente gráfico XFCE4
+- LXTerminal com tema escuro e transparência
+- Painel XFCE4 com atalhos para Terminal, Arquivos, Navegador e Editor
+- PulseAudio com backend de áudio Android (AAudio/OpenSL ES)
+- Tema de ícones Material Black Cherry Suru
+- Configuração GTK2/GTK3 tema escuro
+- Dock Plank com launcher
+
+## Estrutura do repositório
 
 ```
 termux-desktop-pack/
-  install.sh          # automated installer
-  iniciar_athena.sh   # desktop launcher script
+  install.sh          # instalador automático
+  iniciar_athena.sh   # script de inicialização do desktop
   config/             # dotfiles (XFCE4, GTK, LXTerminal, Plank)
-  bin/                # helper scripts
-  icons/              # icon theme (downloaded separately from Releases)
+  bin/                # scripts auxiliares
+  icons/              # tema de ícones (baixado separadamente via Releases)
 ```
 
-## Notes
+## Notas
 
-- The icons folder is distributed as a separate zip in Releases to keep the repository lightweight
-- Compositor is disabled by default for better performance on mobile hardware
-- Audio is configured to run on port 4713 via PulseAudio daemon
+- Os ícones são distribuídos separadamente como zip na aba Releases para manter o repositório leve
+- O compositor gráfico é desativado por padrão para melhor desempenho em hardware mobile
+- O áudio é configurado via PulseAudio na porta 4713
