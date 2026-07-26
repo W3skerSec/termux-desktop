@@ -1,4 +1,4 @@
-# Termux Desktop Pack
+# Termux Desktop
 
 Configuração completa de ambiente gráfico XFCE4 para Termux no Android, otimizada para telas mobile com suporte a áudio, tema de ícones e painel leve.
 
