@@ -105,12 +105,7 @@ if [ -n "$XFCE_PID" ]; then
   fi
 fi
 
-##############################################
-# Desativa compositor do XFWM4 e encerra picom#
-##############################################
-DISPLAY=:0 xfconf-query -c xfwm4 -p /general/use_compositing -s false 2>/dev/null || true
-pkill -9 picom 2>/dev/null || true
-echo "[✓] Compositor e Picom desativados (modo ultra-leve)"
+
 
 ##############################################
 # Configura Painel do XFCE para Modo Retrato  #
