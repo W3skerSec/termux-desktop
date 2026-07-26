@@ -65,12 +65,6 @@ echo "[✓] Iniciando Servidor"
 #############################
 
 
-
-##########################################
-# prioridade máxima ao servidor gráfico  #
-##########################################
-
-
 ##########################################
 # Inicializa o servidor gráfico Termux-X11#
 ##########################################
@@ -100,7 +94,7 @@ export DISPLAY=:0
 ##############################################
 # Salva DBUS address em formato simples      #
 ##############################################
-# Lê DBUS diretamente do ambiente do processo xfce4-session (mais confiável)
+# Lê DBUS diretamente do ambiente do processo xfce4-session
 sleep 1
 XFCE_PID=$(pgrep -x xfce4-session | head -1)
 if [ -n "$XFCE_PID" ]; then
@@ -126,8 +120,3 @@ DISPLAY=:0 xfconf-query -c xfce4-panel -p /panels/panel-0/length -s 100 2>/dev/n
 DISPLAY=:0 xfconf-query -c xfce4-panel -p /panels/panel-0/length-type -s 0 2>/dev/null || true
 DISPLAY=:0 xfconf-query -c xfce4-panel -p /panels/panel-0/position-locked -s true 2>/dev/null || true
 
-##############################################
-# Atualiza cache de ícones                   #
-##############################################
-#gtk-update-icon-cache -f ~/.icons/Papirus-Dark 2>/dev/null || true
-#echo "[✓] AthenaOS Darkness — Sistema pronto (Modo Retrato Limpo)!"
