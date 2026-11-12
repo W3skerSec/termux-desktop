@@ -41,7 +41,7 @@ pkg update -y
 echo "[4/6] Instalando pacotes graficos..."
 # OBS: o dock "plank" vive no Termux como 'plank-reloaded' (fork no x11-repo).
 # Instalar 'plank' da o erro "Unable to locate package plank".
-pkg install -y termux-x11-nightly xfce4 xfwm4 xfce4-panel lxterminal pulseaudio dbus plank-reloaded
+pkg install -y termux-x11-nightly xfce4 xfwm4 xfce4-panel lxterminal pulseaudio dbus plank-reloaded xfce4-whiskermenu-plugin
 
 echo "[5/6] Aplicando configuracoes..."
 mkdir -p ~/.config ~/.local/bin ~/.icons
