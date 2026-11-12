@@ -4,20 +4,20 @@ Configuração completa de ambiente gráfico XFCE4 para Termux no Android, otimi
 
 ## Instalação em um comando
 
-**Recomendado** — baixa, você confere e roda (à prova de erro ao colar):
+**Recomendado**:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/W3skerSec/termux-desktop/main/install.sh -o install.sh
 bash install.sh
 ```
 
-Ou em uma única linha (pipe, não quebra ao colar):
+Ou em uma única linha :
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/W3skerSec/termux-desktop/main/install.sh | bash
 ```
 
-> **Dica:** evite colar a URL dentro de `bash <(...)`. Em alguns teclados/terminais do Android a URL longa quebra em várias linhas e ganha espaços, falhando com `curl: (2) no URL specified`. As formas acima não têm esse problema.
+
 
 ## Instalação manual (passo a passo)
 
