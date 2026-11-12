@@ -4,11 +4,20 @@ Configuração completa de ambiente gráfico XFCE4 para Termux no Android, otimi
 
 ## Instalação em um comando
 
-Cole no Termux e aguarde:
+**Recomendado** — baixa, você confere e roda (à prova de erro ao colar):
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/W3skerSec/termux-desktop/main/install.sh)
+curl -fsSL https://raw.githubusercontent.com/W3skerSec/termux-desktop/main/install.sh -o install.sh
+bash install.sh
 ```
+
+Ou em uma única linha (pipe, não quebra ao colar):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/W3skerSec/termux-desktop/main/install.sh | bash
+```
+
+> **Dica:** evite colar a URL dentro de `bash <(...)`. Em alguns teclados/terminais do Android a URL longa quebra em várias linhas e ganha espaços, falhando com `curl: (2) no URL specified`. As formas acima não têm esse problema.
 
 ## Instalação manual (passo a passo)
 
@@ -23,7 +32,7 @@ pkg update -y && pkg upgrade -y
 ```bash
 pkg install git -y
 git clone https://github.com/W3skerSec/termux-desktop.git
-cd termux-desktop-pack
+cd termux-desktop
 ```
 
 ### 3. Baixar o pacote de ícones
@@ -64,13 +73,10 @@ bash ~/iniciar.sh
 - Configuração GTK2/GTK3 tema escuro
 - Dock Plank com launcher
 
-
-
 ## Notas
 
 - Os ícones são distribuídos separadamente como zip na aba Releases para manter o repositório leve
 - O compositor gráfico é desativado por padrão para melhor desempenho em hardware mobile
-
 
 ## Android 12 e superior - Phantom Process
 
@@ -91,7 +97,6 @@ Essas opcoes reduzem mas nao eliminam completamente o problema.
 Conecte o dispositivo ao PC com ADB habilitado, ou use ADB wireless, e rode:
 
 ```bash
-
 adb shell "/system/bin/device_config set_sync_disabled_for_tests persistent"
 adb shell "/system/bin/device_config put activity_manager max_phantom_processes 2147483647"
 ```
@@ -100,7 +105,6 @@ Para verificar se aplicou:
 
 ```bash
 adb shell "/system/bin/device_config get activity_manager max_phantom_processes"
-
 ```
 
 Para reverter:
@@ -112,11 +116,10 @@ adb shell "/system/bin/device_config delete activity_manager max_phantom_process
 
 ### ADB wireless (sem cabo)
 
-No Android 11+, ative em Opcoes do desenvolvedor > Depuracao sem fio, depois:
+No Android 11+, ative em Opcoes do desenvolvedor > Depuracao sem fio, depois (use o IP e a porta mostrados na tela):
 
-# use o IP e porta mostrados na tela
 ```bash
-adb pair <ip>:<porta> 
+adb pair <ip>:<porta>
 adb connect <ip>:<porta>
 adb shell "..."
 ```
@@ -128,4 +131,3 @@ Se o dispositivo tiver root:
 ```bash
 su -c "device_config put activity_manager max_phantom_processes 2147483647"
 ```
-
