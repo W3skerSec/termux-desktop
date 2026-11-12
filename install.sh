@@ -41,7 +41,7 @@ pkg update -y
 echo "[4/6] Instalando pacotes graficos..."
 # OBS: o dock "plank" vive no Termux como 'plank-reloaded' (fork no x11-repo).
 # Instalar 'plank' da o erro "Unable to locate package plank".
-pkg install -y termux-x11-nightly xfce4 xfwm4 xfce4-panel lxterminal pulseaudio dbus plank-reloaded xfce4-whiskermenu-plugin
+pkg install -y termux-x11-nightly xfce4 xfwm4 xfce4-panel lxterminal pulseaudio dbus plank-reloaded xfce4-whiskermenu-plugin papirus-icon-theme
 
 echo "[5/6] Aplicando configuracoes..."
 mkdir -p ~/.config ~/.local/bin ~/.icons
@@ -95,6 +95,20 @@ if [ -f "$PANEL_XML" ]; then
         echo "  plugin '$p' ausente -> instalando xfce4-$p-plugin"
         pkg install -y "xfce4-$p-plugin" 2>/dev/null \
             || echo "    (aviso: sem pacote 'xfce4-$p-plugin'; remova o plugin do painel se nao usar)"
+    done
+fi
+
+# Blindagem 2: garante que todo app dos launchers do painel esta instalado.
+echo "[*] Verificando apps dos launchers..."
+LDIR="$HOME/.config/xfce4/panel"
+if [ -d "$LDIR" ]; then
+    for exe in $(grep -rhE '^Exec=' "$LDIR"/*/*.desktop 2>/dev/null \
+                 | sed -E 's/^Exec=//; s/ .*//' | sort -u); do
+        case "$exe" in /*) continue ;; esac     # caminho absoluto (launch-terminal) -> pula
+        command -v "$exe" >/dev/null 2>&1 && continue
+        echo "  app '$exe' ausente -> instalando"
+        pkg install -y "$exe" 2>/dev/null \
+            || echo "    (aviso: pacote '$exe' nao encontrado; ajuste/remova o launcher)"
     done
 fi
 
