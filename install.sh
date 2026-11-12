@@ -3,6 +3,7 @@ set -e
 
 REPO="https://github.com/W3skerSec/termux-desktop"
 ICONS_URL="$REPO/releases/latest/download/athena_icons.zip"
+THEMES_URL="$REPO/releases/latest/download/athena_themes.zip"
 INSTALL_DIR="$HOME/termux-desktop-pack"
 TMP="${TMPDIR:-$PREFIX/tmp}"   # Termux usa $PREFIX/tmp, NUNCA /tmp (nao e gravavel)
 
@@ -79,6 +80,19 @@ else
     fi
     rm -rf "$TMP/athena_icons.zip" "$TMP/icons_tmp"
 fi
+
+echo "[*] Instalando temas GTK + cursor..."
+mkdir -p ~/.themes ~/.icons
+rm -rf "$TMP/themes_tmp"; mkdir -p "$TMP/themes_tmp"
+if wget -q --show-progress -O "$TMP/athena_themes.zip" "$THEMES_URL" \
+   && unzip -q -o "$TMP/athena_themes.zip" -d "$TMP/themes_tmp/"; then
+    cp -rf "$TMP/themes_tmp/themes/"* ~/.themes/ 2>/dev/null || true
+    cp -rf "$TMP/themes_tmp/icons/"*  ~/.icons/  2>/dev/null || true
+    echo "  Temas (Graphite/Nightfox) e cursor (Bibata) instalados."
+else
+    echo "  (aviso: nao foi possivel baixar os temas; usando o padrao)"
+fi
+rm -rf "$TMP/athena_themes.zip" "$TMP/themes_tmp"
 
 # Blindagem: garante que todo plugin referenciado no painel tem pacote instalado.
 # (evita o erro "Plugin X could not be loaded" num Termux zerado.)
