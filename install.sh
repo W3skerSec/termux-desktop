@@ -58,6 +58,9 @@ chmod +x ~/.local/bin/launch-terminal
 cp -f "$SCRIPT_DIR/iniciar.sh" ~/iniciar.sh
 chmod +x ~/iniciar.sh
 
+cp -f "$SCRIPT_DIR/parar.sh" ~/parar.sh
+chmod +x ~/parar.sh
+
 echo "[6/6] Instalando tema de icones..."
 if [ -d "$SCRIPT_DIR/icons" ] && [ "$(ls -A "$SCRIPT_DIR/icons" 2>/dev/null)" ]; then
     cp -rf "$SCRIPT_DIR/icons/"* ~/.icons/
