@@ -4,40 +4,48 @@ set -e
 REPO="https://github.com/W3skerSec/termux-desktop"
 ICONS_URL="$REPO/releases/latest/download/icons.zip"
 INSTALL_DIR="$HOME/termux-desktop-pack"
+TMP="${TMPDIR:-$PREFIX/tmp}"   # Termux usa $PREFIX/tmp, NUNCA /tmp (nao e gravavel)
 
 echo ""
 echo "Termux Desktop Pack - Instalador"
 echo "================================="
 echo ""
 
-# Se rodando via curl (sem o repo clonado), clona primeiro
+# Detecta: rodando dentro do repo clonado, ou standalone via curl?
 if [ ! -f "$(dirname "$0")/config/xfce4/terminal/terminalrc" ]; then
-    echo "[1/5] Instalando dependencias..."
-    pkg update -y -q
-    pkg install -y git wget unzip curl 2>/dev/null
+    echo "[1/6] Instalando dependencias base..."
+    pkg update -y
+    pkg install -y git wget unzip curl
 
-    echo "[2/5] Clonando repositorio..."
-    if [ -d "$INSTALL_DIR" ]; then
-        echo "Diretorio ja existe, atualizando..."
+    echo "[2/6] Baixando o projeto..."
+    if [ -d "$INSTALL_DIR/.git" ]; then
+        echo "  Ja existe, atualizando..."
         git -C "$INSTALL_DIR" pull -q
     else
+        rm -rf "$INSTALL_DIR"
         git clone -q "$REPO.git" "$INSTALL_DIR"
     fi
     SCRIPT_DIR="$INSTALL_DIR"
 else
     SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-    echo "[1/5] Instalando dependencias..."
-    pkg update -y -q
-    pkg install -y wget unzip 2>/dev/null
+    echo "[1/6] Instalando dependencias base..."
+    pkg update -y
+    pkg install -y wget unzip
+    echo "[2/6] Usando arquivos locais ($SCRIPT_DIR)"
 fi
 
-echo "[2/5] Instalando pacotes graficos..."
-pkg install -y termux-x11-nightly xfce4 lxterminal pulseaudio dbus xfce4-panel xfwm4 2>/dev/null
+echo "[3/6] Habilitando repositorio grafico (x11-repo)..."
+pkg install -y x11-repo
+pkg update -y
 
-echo "[3/5] Preparando diretorios..."
+echo "[4/6] Instalando pacotes graficos..."
+pkg install -y termux-x11-nightly xfce4 xfwm4 xfce4-panel lxterminal pulseaudio dbus
+# Dock Plank e opcional: se nao estiver disponivel, segue sem abortar
+pkg install -y plank || echo "  (aviso: plank indisponivel, dock opcional ignorado)"
+
+echo "[5/6] Aplicando configuracoes..."
 mkdir -p ~/.config ~/.local/bin ~/.icons
 
-echo "[4/5] Aplicando configuracoes de interface..."
 cp -rf "$SCRIPT_DIR/config/xfce4" ~/.config/
 cp -rf "$SCRIPT_DIR/config/lxterminal" ~/.config/
 [ -d "$SCRIPT_DIR/config/plank" ]   && cp -rf "$SCRIPT_DIR/config/plank" ~/.config/
@@ -50,18 +58,21 @@ chmod +x ~/.local/bin/launch-terminal
 cp -f "$SCRIPT_DIR/iniciar.sh" ~/iniciar.sh
 chmod +x ~/iniciar.sh
 
-# Baixar e instalar icones se nao existirem localmente
+echo "[6/6] Instalando tema de icones..."
 if [ -d "$SCRIPT_DIR/icons" ] && [ "$(ls -A "$SCRIPT_DIR/icons" 2>/dev/null)" ]; then
     cp -rf "$SCRIPT_DIR/icons/"* ~/.icons/
 else
-    echo "[4/5] Baixando tema de icones (pode demorar)..."
-    wget -q --show-progress -O /tmp/icons.zip "$ICONS_URL"
-    unzip -q /tmp/icons.zip -d /tmp/icons_tmp/
-    cp -rf /tmp/icons_tmp/*/icons/* ~/.icons/ 2>/dev/null || cp -rf /tmp/icons_tmp/ ~/.icons/
-    rm -rf /tmp/icons.zip /tmp/icons_tmp
+    echo "  Baixando tema de icones (pode demorar)..."
+    rm -rf "$TMP/icons_tmp"
+    mkdir -p "$TMP/icons_tmp"
+    wget -q --show-progress -O "$TMP/icons.zip" "$ICONS_URL"
+    unzip -q "$TMP/icons.zip" -d "$TMP/icons_tmp/"
+    cp -rf "$TMP/icons_tmp/"*/icons/* ~/.icons/ 2>/dev/null || cp -rf "$TMP/icons_tmp/"* ~/.icons/
+    rm -rf "$TMP/icons.zip" "$TMP/icons_tmp"
 fi
 
-echo "[5/5] Instalacao concluida!"
+echo ""
+echo "[OK] Instalacao concluida!"
 echo ""
 echo "Para iniciar o desktop:"
 echo "  1. Abra o app Termux-X11"
