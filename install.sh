@@ -39,9 +39,9 @@ pkg install -y x11-repo
 pkg update -y
 
 echo "[4/6] Instalando pacotes graficos..."
-pkg install -y termux-x11-nightly xfce4 xfwm4 xfce4-panel lxterminal pulseaudio dbus
-# Dock Plank e opcional: se nao estiver disponivel, segue sem abortar
-pkg install -y plank || echo "  (aviso: plank indisponivel, dock opcional ignorado)"
+# OBS: o dock "plank" vive no Termux como 'plank-reloaded' (fork no x11-repo).
+# Instalar 'plank' da o erro "Unable to locate package plank".
+pkg install -y termux-x11-nightly xfce4 xfwm4 xfce4-panel lxterminal pulseaudio dbus plank-reloaded
 
 echo "[5/6] Aplicando configuracoes..."
 mkdir -p ~/.config ~/.local/bin ~/.icons
