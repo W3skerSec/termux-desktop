@@ -51,6 +51,14 @@ Abra o app Termux-X11, depois rode no Termux:
 bash ~/iniciar.sh
 ```
 
+### 5. Parar o desktop
+
+Para encerrar tudo de forma limpa (XFCE, X11, PulseAudio, dbus) e liberar os recursos:
+
+```bash
+bash ~/parar.sh
+```
+
 ## Requisitos
 
 - Android com Termux instalado
