@@ -2,7 +2,7 @@
 set -e
 
 REPO="https://github.com/W3skerSec/termux-desktop"
-ICONS_URL="$REPO/releases/latest/download/icons.zip"
+ICONS_URL="$REPO/releases/latest/download/athena_icons.zip"
 INSTALL_DIR="$HOME/termux-desktop-pack"
 TMP="${TMPDIR:-$PREFIX/tmp}"   # Termux usa $PREFIX/tmp, NUNCA /tmp (nao e gravavel)
 
@@ -62,13 +62,19 @@ echo "[6/6] Instalando tema de icones..."
 if [ -d "$SCRIPT_DIR/icons" ] && [ "$(ls -A "$SCRIPT_DIR/icons" 2>/dev/null)" ]; then
     cp -rf "$SCRIPT_DIR/icons/"* ~/.icons/
 else
-    echo "  Baixando tema de icones (pode demorar)..."
+    echo "  Baixando tema de icones (pode demorar, ~237MB)..."
     rm -rf "$TMP/icons_tmp"
     mkdir -p "$TMP/icons_tmp"
-    wget -q --show-progress -O "$TMP/icons.zip" "$ICONS_URL"
-    unzip -q "$TMP/icons.zip" -d "$TMP/icons_tmp/"
-    cp -rf "$TMP/icons_tmp/"*/icons/* ~/.icons/ 2>/dev/null || cp -rf "$TMP/icons_tmp/"* ~/.icons/
-    rm -rf "$TMP/icons.zip" "$TMP/icons_tmp"
+    # Icones sao cosmeticos: se falhar o download/extracao, apenas avisa (nao aborta)
+    if wget -q --show-progress -O "$TMP/athena_icons.zip" "$ICONS_URL" \
+       && unzip -q -o "$TMP/athena_icons.zip" -d "$TMP/icons_tmp/"; then
+        cp -rf "$TMP/icons_tmp/"*/icons/* ~/.icons/ 2>/dev/null \
+            || cp -rf "$TMP/icons_tmp/"* ~/.icons/ 2>/dev/null || true
+        echo "  Tema de icones instalado."
+    else
+        echo "  (aviso: nao foi possivel baixar os icones; o desktop funciona sem eles)"
+    fi
+    rm -rf "$TMP/athena_icons.zip" "$TMP/icons_tmp"
 fi
 
 echo ""
