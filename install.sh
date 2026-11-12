@@ -88,7 +88,12 @@ if wget -q --show-progress -O "$TMP/athena_themes.zip" "$THEMES_URL" \
    && unzip -q -o "$TMP/athena_themes.zip" -d "$TMP/themes_tmp/"; then
     cp -rf "$TMP/themes_tmp/themes/"* ~/.themes/ 2>/dev/null || true
     cp -rf "$TMP/themes_tmp/icons/"*  ~/.icons/  2>/dev/null || true
-    echo "  Temas (Graphite/Nightfox) e cursor (Bibata) instalados."
+    if [ -d "$TMP/themes_tmp/fonts" ]; then
+        mkdir -p ~/.local/share/fonts
+        cp -f "$TMP/themes_tmp/fonts/"*.ttf ~/.local/share/fonts/ 2>/dev/null || true
+        fc-cache -f ~/.local/share/fonts >/dev/null 2>&1 || true
+    fi
+    echo "  Temas (Graphite/Nightfox), cursor (Bibata) e fonte (Inter) instalados."
 else
     echo "  (aviso: nao foi possivel baixar os temas; usando o padrao)"
 fi
