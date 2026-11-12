@@ -35,22 +35,15 @@ git clone https://github.com/W3skerSec/termux-desktop.git
 cd termux-desktop
 ```
 
-### 3. Baixar o pacote de ícones
-
-```bash
-mkdir -p icons
-wget -O icons.zip https://github.com/W3skerSec/termux-desktop/releases/latest/download/icons.zip
-unzip icons.zip -d icons/
-rm icons.zip
-```
-
-### 4. Executar o instalador
+### 3. Executar o instalador
 
 ```bash
 bash install.sh
 ```
 
-### 5. Iniciar o desktop
+> O instalador cuida de tudo: habilita o `x11-repo`, instala os pacotes gráficos, aplica as configurações e baixa o tema de ícones automaticamente.
+
+### 4. Iniciar o desktop
 
 Abra o app Termux-X11, depois rode no Termux:
 
