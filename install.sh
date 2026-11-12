@@ -80,6 +80,24 @@ else
     rm -rf "$TMP/athena_icons.zip" "$TMP/icons_tmp"
 fi
 
+# Blindagem: garante que todo plugin referenciado no painel tem pacote instalado.
+# (evita o erro "Plugin X could not be loaded" num Termux zerado.)
+echo "[*] Verificando plugins do painel..."
+PANEL_XML="$HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml"
+# plugins que JA vem com o xfce4-panel (nao tem pacote proprio)
+CORE_PLUGINS=" separator launcher tasklist systray systemtray showdesktop directorymenu clock actions applicationsmenu pager windowmenu windowck "
+if [ -f "$PANEL_XML" ]; then
+    for p in $(grep -oE 'type="string" value="[a-z][a-z-]*"' "$PANEL_XML" \
+               | sed -E 's/.*value="([a-z-]+)".*/\1/' | sort -u); do
+        case "$CORE_PLUGINS" in *" $p "*) continue ;; esac
+        # ja instalado? (todo plugin registra um .desktop)
+        [ -f "$PREFIX/share/xfce4/panel/plugins/$p.desktop" ] && continue
+        echo "  plugin '$p' ausente -> instalando xfce4-$p-plugin"
+        pkg install -y "xfce4-$p-plugin" 2>/dev/null \
+            || echo "    (aviso: sem pacote 'xfce4-$p-plugin'; remova o plugin do painel se nao usar)"
+    done
+fi
+
 echo ""
 echo "[OK] Instalacao concluida!"
 echo ""
